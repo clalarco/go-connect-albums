@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package album.v1;
+
+option go_package = "example/gen/album/v1;albumv1";
+
+message Album {
+  string id = 1;
+  string title = 2;
+  string artist = 3;
+  float price = 4;
+}
+
+message Albums {
+  map<string, Album> item_map = 1;
+}
+
+message GetRequest {
+  string id = 1;
+}
+
+message GetResponse {
+  Album album = 1;
+}
+
+message GetAllRequest {}
+
+message GetAllResponse {
+  map<string, Album> albums = 1;
+}
+
+message AddRequest {
+  Album album = 1;
+}
+
+message AddResponse {
+  string id = 1;
+}
+
+message DeleteRequest {
+  string id = 1;
+}
+
+message DeleteResponse {
+  string id = 1;
+}
+
+service AlbumService {
+  rpc Get(GetRequest) returns (GetResponse) {}
+  rpc GetAll(GetAllRequest) returns (GetAllResponse) {}
+  rpc Add(AddRequest) returns (AddResponse) {}
+  rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+}
